@@ -9,7 +9,7 @@ const characterData = () => {
 
     characters.innerHTML = '';
 
-    let baseURL = '';
+    let baseURL = 'https://my-json-server.typicode.com/leon-kxng/flatcuties_code_challenge/characters';
     
     fetch(baseURL)
     .then(response => response.json())
