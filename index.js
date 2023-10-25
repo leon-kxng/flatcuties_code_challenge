@@ -6,14 +6,17 @@ const characterData = () => {
     const characterVotes = document.getElementById('vote-count');
     const votesForm = document.getElementById('votes-form');
     const votes = document.getElementById('votes');
+    const submitVoteButton = document.querySelector('.btn-submit');
+    const resetVoteButton = document.querySelector('.btn-reset');
 
-    characters.innerHTML = '';
-
+    let selectedCandidate = null; // Store the currently selected candidate
     let baseURL = 'https://my-json-server.typicode.com/leon-kxng/flatcuties_code_challenge/characters';
-    
+
     fetch(baseURL)
-    .then(response => response.json())
-    .then(data => renderCharacterList(data));
+        .then(response => response.json())
+        .then(data => {
+            renderCharacterList(data);
+        });
 
     function renderCharacterList(data) {
         data.forEach(candidate => {
@@ -25,17 +28,26 @@ const characterData = () => {
     }
 
     function displayCharacterDetails(candidate) {
+        selectedCandidate = candidate; // Update the selected candidate
+
         characterImage.src = candidate.image;
         characterName.innerText = candidate.name;
         characterVotes.innerText = candidate.votes;
+        votes.value = ''; // Clear the input field
 
-        let currentVote = parseInt(characterVotes.textContent, 10);
+        submitVoteButton.addEventListener('click', () => {
+            if (selectedCandidate) {
+                let newVote = parseInt(votes.value, 10);
+                selectedCandidate.votes += newVote;
+                characterVotes.innerText = selectedCandidate.votes;
+            }
+        });
 
-        votesForm.addEventListener('submit', (event) => {
-            event.preventDefault();
-            let newVote = parseInt(votes.value, 10);
-            currentVote = currentVote + newVote;
-            characterVotes.textContent = currentVote;
+        resetVoteButton.addEventListener('click', () => {
+            if (selectedCandidate) {
+                selectedCandidate.votes = 0;
+                characterVotes.innerText = '0';
+            }
         });
     }
 }
