@@ -10,7 +10,7 @@
 
 # Running the aplication
 - Open the index.html file in a web browser. You will be greeted with the title "FLATACUTIES" and a list of character names (which are fetched from an API). Click on a character's name to view more detailed information. In the detailed view, you can see the character's image, the total number of votes received, and a form to add more votes.
-- you can also visit the link https://leon-kxng.github.io/flatcuties_code_challenge/
+- You can also visit the link https://leon-kxng.github.io/flatcuties_code_challenge/
 
 # Author & Licences 
 leon-kxng  & [MIT license](LICENSE) 
